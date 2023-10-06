@@ -47,9 +47,7 @@ int main(int argc, char * argv[]) {
     while (!feof(infile)) {
         int mask = 1;
         for (int i = 0; i < 7; i++) {
-            if (1.0*rand()/RAND_MAX < P) {
-                c ^= mask;
-            }
+            if (1.0*rand()/RAND_MAX < P) { c ^= mask; }
             mask <<= 1;
         }
         fwrite(&c, 1, 1, outfile);
