@@ -4,7 +4,6 @@
 int main(int argc, char * argv[]) {
 
     double P = 0.1;
-    srand(119);
     
     FILE * infile = fopen(argv[1], "r"),
          * outfile = fopen("out.txt", "w");
@@ -19,7 +18,14 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
+    int c = fgetc(infile);
+
+    while (!feof(infile)) {
+        fwrite(&c, 1, 1, outfile);
+        c = fgetc(infile);
+    }
 
     fclose(infile);
+    fclose(outfile);
     return 0;
 }
