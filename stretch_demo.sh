@@ -3,11 +3,11 @@
 
 SEED=178
 
-echo -e "\x1b[1;33mOriginal text:\x1b[0m\n"
+echo -e "\x1b[1;33mOriginal text:\x1b[0m"
 cat $1
 
-echo -e "\x1b[1;33m\nWithout encoding:\x1b[0m\n"
+echo -e "\x1b[1;33m\nWithout encoding:\x1b[0m"
 ./scramble $2 $SEED < $1
 
-echo -e "\x1b[1;33m\nWith encoding:\x1b[0m\n"
+echo -e "\x1b[1;33m\nWith encoding:\x1b[0m"
 ./stretch $3 < $1 | ./scramble $2 $SEED | ./stretch $3 --decode
