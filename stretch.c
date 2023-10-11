@@ -34,9 +34,18 @@ int main(int argc, char * argv[]) {
         }
     }
 
-    if (decode) {
+    int c = getchar();
 
+    if (decode) {
+        // TODO : implement decoding
         return 0;
+    }
+
+    while (c != EOF) {
+        for (int i = 0; i < LEN; i++) {
+            putchar(c);
+        }
+        c = getchar();
     }
 
     return 0;
