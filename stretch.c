@@ -5,8 +5,27 @@
 #include <stdint.h>
 
 
-uint8_t choose_byte(const uint8_t * BYTES, size_t LEN) {
-    return BYTES[LEN - 1];
+uint8_t choose_byte(const uint8_t BYTES[], size_t LEN) {
+    size_t counts[8] = {0};
+    uint8_t original = 0;
+
+    // Count up the occurences of each bit
+    for (size_t byte = 0; byte < LEN; byte++) {
+        uint8_t mask = 1;
+        for (uint8_t bit = 0; bit < 8; bit++) {
+            if (mask & BYTES[byte]) { counts[bit]++; }
+            mask <<= 1;
+        }
+    }
+
+    // Reconstructs the byte
+    for (uint8_t bit = 0; bit < 8; bit++) {
+        if (counts[bit] > LEN/2) {
+            original += 1 << bit;
+        }
+    }
+
+    return original;
 }
 
 
@@ -16,7 +35,7 @@ void decode_bytes(size_t LEN) {
 
     int16_t c = getchar();
     while (c != EOF) {
-        bytes[counter] = c; // only uses lower 8 bits
+        bytes[counter] = c; // only stores the lower 8 bits
         counter = (counter + 1)%LEN;
 
         // Check if bytes are filled out
