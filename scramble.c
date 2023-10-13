@@ -3,11 +3,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 int main(int argc, char * argv[]) {
 
     double P = 0.0;
-    long seed = 0;
+    uint16_t seed = 0;
 
     if (argc < 2 || argc > 3) {
     	printf("\x1b[1;31mError!\x1b[0m Incorrect number of arguments.\n");
@@ -30,15 +31,15 @@ int main(int argc, char * argv[]) {
 
     srand(seed);
 
-    int c = getchar();
+    int16_t c = getchar();
 
     while (c != EOF) {
-        int mask = 1;
-        for (int i = 0; i < 7; i++) {
+        uint8_t mask = 1;
+        for (uint8_t i = 0; i < 7; i++) {
             if (1.0*rand()/RAND_MAX < P) { c ^= mask; }
             mask <<= 1;
         }
-        putchar(c);
+        putchar((uint8_t)c);
         c = getchar();
     }
 
