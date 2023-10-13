@@ -39,12 +39,13 @@
 !*/
 !*.*
 
-# Debug files
+# Debug files and demo
 *.dSYM/
 *.su
 *.idb
 *.pdb
 *.txt
+*.ppm
 
 # Kernel Module Compile Results
 *.mod*
