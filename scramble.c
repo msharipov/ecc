@@ -36,7 +36,7 @@ int main(int argc, char * argv[]) {
     while (c != EOF) {
         uint8_t mask = 1,
                 new_byte = 0;
-        for (uint8_t i = 0; i < 7; i++) {
+        for (uint8_t i = 0; i < 8; i++) {
             if (1.0*rand()/RAND_MAX < P) {
                 // Replaced with noise
                 new_byte += (rand()%2) * mask;
