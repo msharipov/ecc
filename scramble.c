@@ -19,9 +19,9 @@ int main(int argc, char * argv[]) {
     char * endpt;
     P = strtod(argv[1], &endpt);
 
-    if (P < 0.0 || P > 0.5 || endpt == argv[1]) {
+    if (P < 0.0 || P > 1.0 || endpt == argv[1]) {
     	printf("\x1b[1;31mError!\x1b[0m Incorrect value of p: %s\n", argv[3]);
-	    printf("p should be between 0 and 0.5, inclusively.\n");
+	    printf("p should be between 0 and 1.0, inclusively.\n");
         return 1;
     }
 
@@ -34,12 +34,19 @@ int main(int argc, char * argv[]) {
     int16_t c = getchar();
 
     while (c != EOF) {
-        uint8_t mask = 1;
+        uint8_t mask = 1,
+                new_byte = 0;
         for (uint8_t i = 0; i < 7; i++) {
-            if (1.0*rand()/RAND_MAX < P) { c ^= mask; }
+            if (1.0*rand()/RAND_MAX < P) {
+                // Replaced with noise
+                new_byte += (rand()%2) * mask;
+            } else {
+                // Correct transmission
+                new_byte += c & mask;
+            }
             mask <<= 1;
         }
-        putchar((uint8_t)c);
+        putchar(new_byte);
         c = getchar();
     }
 
